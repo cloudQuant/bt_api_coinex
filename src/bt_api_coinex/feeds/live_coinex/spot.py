@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Any
 
-from bt_api_base.containers.requestdatas.request_data import RequestData
 from bt_api_coinex.feeds.live_coinex.request_base import CoinExRequestData
 
 

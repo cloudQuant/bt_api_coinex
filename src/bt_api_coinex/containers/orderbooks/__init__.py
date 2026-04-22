@@ -23,7 +23,7 @@ class CoinExOrderBookData(OrderBookData):
         self.order_book_data: Any = orderbook_info if has_been_json_encoded else None
         self.has_been_init_data = False
 
-    def init_data(self) -> "CoinExOrderBookData":
+    def init_data(self) -> CoinExOrderBookData:
         if not self.has_been_json_encoded:
             self.order_book_data = (
                 json.loads(self.order_book_info)

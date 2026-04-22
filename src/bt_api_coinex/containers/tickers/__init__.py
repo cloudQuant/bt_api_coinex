@@ -33,7 +33,7 @@ class CoinExTickerData(TickerData):
         self.volume: float | None = None
         self.has_been_init_data = False
 
-    def init_data(self) -> "CoinExTickerData":
+    def init_data(self) -> CoinExTickerData:
         if not self.has_been_json_encoded:
             self.ticker_data = (
                 json.loads(self.ticker_info)

@@ -31,7 +31,7 @@ class CoinExBarData(BarData):
         self.volume: float | None = None
         self.has_been_init_data = False
 
-    def init_data(self) -> "CoinExBarData":
+    def init_data(self) -> CoinExBarData:
         if not self.has_been_json_encoded:
             self.bar_data = (
                 json.loads(self.bar_info) if isinstance(self.bar_info, str) else self.bar_info

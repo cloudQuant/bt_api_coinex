@@ -27,7 +27,7 @@ class CoinExAccountData(AccountData):
         self.all_data: dict[str, Any] | None = None
         self.has_been_init_data = False
 
-    def init_data(self) -> "CoinExAccountData":
+    def init_data(self) -> CoinExAccountData:
         if not self.has_been_json_encoded:
             self.account_data = (
                 json.loads(self.account_info)
