@@ -22,7 +22,9 @@ class CoinExTickerData(TickerData):
         self.symbol_name = symbol_name
         self.asset_type = asset_type
         self.ticker_data: dict[str, Any] | None = (
-            ticker_info if has_been_json_encoded and isinstance(ticker_info, dict) else None
+            ticker_info
+            if has_been_json_encoded and isinstance(ticker_info, dict)
+            else None
         )
         self.ticker_symbol_name: str | None = None
         self.last_price: float | None = None
@@ -46,7 +48,9 @@ class CoinExTickerData(TickerData):
 
         if isinstance(self.ticker_data, dict):
             data = self.ticker_data
-            self.ticker_symbol_name = from_dict_get_string(data, "market", self.symbol_name)
+            self.ticker_symbol_name = from_dict_get_string(
+                data, "market", self.symbol_name
+            )
             self.last_price = from_dict_get_float(data, "last", 0.0)
             self.bid_price = from_dict_get_float(data, "bid", 0.0)
             self.ask_price = from_dict_get_float(data, "ask", 0.0)

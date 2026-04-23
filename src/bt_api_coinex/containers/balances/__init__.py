@@ -18,7 +18,9 @@ class CoinExBalanceData(BalanceData):
         super().__init__(balance_info, has_been_json_encoded)
         self.exchange_name = "COINEX"
         self.asset_type = asset_type
-        self.balance_data: dict[str, Any] | None = balance_info if has_been_json_encoded else None
+        self.balance_data: dict[str, Any] | None = (
+            balance_info if has_been_json_encoded else None
+        )
         self.currency: str | None = None
         self.available: float | None = None
         self.locked: float | None = None
@@ -98,7 +100,9 @@ class CoinExBalanceData(BalanceData):
         return 0.0
 
     def is_zero_balance(self) -> bool:
-        return not (self.available and self.available > 0) and not (self.locked and self.locked > 0)
+        return not (self.available and self.available > 0) and not (
+            self.locked and self.locked > 0
+        )
 
     def get_account_id(self) -> str | None:
         return None

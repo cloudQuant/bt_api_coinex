@@ -2,7 +2,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from bt_api_base.error import ErrorCategory, ErrorTranslator, UnifiedError, UnifiedErrorCode
+from bt_api_base.error import (
+    ErrorCategory,
+    ErrorTranslator,
+    UnifiedError,
+    UnifiedErrorCode,
+)
 
 
 class CoinExErrorTranslator(ErrorTranslator):

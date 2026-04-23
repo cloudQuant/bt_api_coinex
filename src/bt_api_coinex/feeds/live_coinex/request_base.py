@@ -18,10 +18,16 @@ class CoinExRequestData(Feed):
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
         super().__init__(data_queue, **kwargs)
         self._api_key = (
-            kwargs.get("public_key") or kwargs.get("api_key") or kwargs.get("access_id") or ""
+            kwargs.get("public_key")
+            or kwargs.get("api_key")
+            or kwargs.get("access_id")
+            or ""
         )
         self._api_secret = (
-            kwargs.get("private_key") or kwargs.get("api_secret") or kwargs.get("secret_key") or ""
+            kwargs.get("private_key")
+            or kwargs.get("api_secret")
+            or kwargs.get("secret_key")
+            or ""
         )
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.exchange_name = kwargs.get("exchange_name", "COINEX___SPOT")
@@ -100,7 +106,9 @@ class CoinExRequestData(Feed):
     def disconnect(self) -> None:
         super().disconnect()
 
-    def request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
+    def request(
+        self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False
+    ):
         if params is None:
             params = {}
         if extra_data is None:
@@ -121,7 +129,9 @@ class CoinExRequestData(Feed):
             body_str = json.dumps(body) if body else ""
             json_body = body
             if is_sign:
-                headers.update(self._generate_auth_headers(method, request_path, body_str))
+                headers.update(
+                    self._generate_auth_headers(method, request_path, body_str)
+                )
 
         res = self.http_request(method, url, headers, json_body, timeout)
         return RequestData(res, extra_data)
@@ -149,7 +159,9 @@ class CoinExRequestData(Feed):
             body_str = json.dumps(body) if body else ""
             json_body = body
             if is_sign:
-                headers.update(self._generate_auth_headers(method, request_path, body_str))
+                headers.update(
+                    self._generate_auth_headers(method, request_path, body_str)
+                )
 
         res = await self.async_http_request(method, url, headers, json_body, timeout)
         return RequestData(res, extra_data)
@@ -223,7 +235,11 @@ class CoinExRequestData(Feed):
     def _get_kline(self, symbol, period="1h", count=100, extra_data=None, **kwargs):
         coinex_symbol = self._params.get_symbol(symbol)
         path = self._params.get_rest_path("get_kline")
-        params = {"market": coinex_symbol, "type": self._params.get_period(period), "limit": count}
+        params = {
+            "market": coinex_symbol,
+            "type": self._params.get_period(period),
+            "limit": count,
+        }
         extra_data = self._update_extra_data(
             extra_data,
             request_type="get_kline",
@@ -268,14 +284,25 @@ class CoinExRequestData(Feed):
         return [], False
 
     def _make_order(
-        self, symbol, size, price=None, order_type="buy-limit", extra_data=None, **kwargs
+        self,
+        symbol,
+        size,
+        price=None,
+        order_type="buy-limit",
+        extra_data=None,
+        **kwargs,
     ):
         path = self._params.get_rest_path("make_order")
         coinex_symbol = self._params.get_symbol(symbol)
         parts = order_type.lower().replace("-", " ").split()
         side = parts[0] if parts else "buy"
         otype = parts[1] if len(parts) > 1 else "limit"
-        body = {"market": coinex_symbol, "side": side, "type": otype, "amount": str(size)}
+        body = {
+            "market": coinex_symbol,
+            "side": side,
+            "type": otype,
+            "amount": str(size),
+        }
         if price is not None and otype == "limit":
             body["price"] = str(price)
         extra_data = self._update_extra_data(

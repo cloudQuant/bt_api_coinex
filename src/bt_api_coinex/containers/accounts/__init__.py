@@ -39,7 +39,9 @@ class CoinExAccountData(AccountData):
             return self
 
         if isinstance(self.account_data, dict):
-            balances = self.account_data.get("balance", self.account_data.get("balances", []))
+            balances = self.account_data.get(
+                "balance", self.account_data.get("balances", [])
+            )
             if isinstance(balances, list):
                 self.balances = balances
 

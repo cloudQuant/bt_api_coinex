@@ -36,11 +36,15 @@ class CoinExRequestDataSpot(CoinExRequestData):
     get_ticker = get_tick
     async_get_ticker = async_get_tick
 
-    def get_depth(self, symbol: Any, count: int = 20, extra_data: Any = None, **kwargs: Any):
+    def get_depth(
+        self, symbol: Any, count: int = 20, extra_data: Any = None, **kwargs: Any
+    ):
         path, params, extra_data = self._get_depth(symbol, count, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
-    def async_get_depth(self, symbol: Any, count: int = 20, extra_data: Any = None, **kwargs: Any):
+    def async_get_depth(
+        self, symbol: Any, count: int = 20, extra_data: Any = None, **kwargs: Any
+    ):
         path, params, extra_data = self._get_depth(symbol, count, extra_data, **kwargs)
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
@@ -55,7 +59,9 @@ class CoinExRequestDataSpot(CoinExRequestData):
         extra_data: Any = None,
         **kwargs: Any,
     ):
-        path, params, extra_data = self._get_kline(symbol, period, count, extra_data, **kwargs)
+        path, params, extra_data = self._get_kline(
+            symbol, period, count, extra_data, **kwargs
+        )
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_kline(
@@ -66,7 +72,9 @@ class CoinExRequestDataSpot(CoinExRequestData):
         extra_data: Any = None,
         **kwargs: Any,
     ):
-        path, params, extra_data = self._get_kline(symbol, period, count, extra_data, **kwargs)
+        path, params, extra_data = self._get_kline(
+            symbol, period, count, extra_data, **kwargs
+        )
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
             callback=self.async_callback,
@@ -75,13 +83,17 @@ class CoinExRequestDataSpot(CoinExRequestData):
     def get_trade_history(
         self, symbol: Any, count: int = 50, extra_data: Any = None, **kwargs: Any
     ):
-        path, params, extra_data = self._get_trade_history(symbol, count, extra_data, **kwargs)
+        path, params, extra_data = self._get_trade_history(
+            symbol, count, extra_data, **kwargs
+        )
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_trade_history(
         self, symbol: Any, count: int = 50, extra_data: Any = None, **kwargs: Any
     ):
-        path, params, extra_data = self._get_trade_history(symbol, count, extra_data, **kwargs)
+        path, params, extra_data = self._get_trade_history(
+            symbol, count, extra_data, **kwargs
+        )
         self.submit(
             self.async_request(path, params=params, extra_data=extra_data),
             callback=self.async_callback,
@@ -133,25 +145,45 @@ class CoinExRequestDataSpot(CoinExRequestData):
             callback=self.async_callback,
         )
 
-    def cancel_order(self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any):
-        path, params, extra_data = self._cancel_order(symbol, order_id, extra_data, **kwargs)
+    def cancel_order(
+        self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any
+    ):
+        path, params, extra_data = self._cancel_order(
+            symbol, order_id, extra_data, **kwargs
+        )
         return self.request(path, params=params, extra_data=extra_data, is_sign=True)
 
-    def async_cancel_order(self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any):
-        path, params, extra_data = self._cancel_order(symbol, order_id, extra_data, **kwargs)
+    def async_cancel_order(
+        self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any
+    ):
+        path, params, extra_data = self._cancel_order(
+            symbol, order_id, extra_data, **kwargs
+        )
         self.submit(
-            self.async_request(path, params=params, extra_data=extra_data, is_sign=True),
+            self.async_request(
+                path, params=params, extra_data=extra_data, is_sign=True
+            ),
             callback=self.async_callback,
         )
 
-    def query_order(self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any):
-        path, params, extra_data = self._query_order(symbol, order_id, extra_data, **kwargs)
+    def query_order(
+        self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any
+    ):
+        path, params, extra_data = self._query_order(
+            symbol, order_id, extra_data, **kwargs
+        )
         return self.request(path, params=params, extra_data=extra_data, is_sign=True)
 
-    def async_query_order(self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any):
-        path, params, extra_data = self._query_order(symbol, order_id, extra_data, **kwargs)
+    def async_query_order(
+        self, symbol: Any, order_id: Any, extra_data: Any = None, **kwargs: Any
+    ):
+        path, params, extra_data = self._query_order(
+            symbol, order_id, extra_data, **kwargs
+        )
         self.submit(
-            self.async_request(path, params=params, extra_data=extra_data, is_sign=True),
+            self.async_request(
+                path, params=params, extra_data=extra_data, is_sign=True
+            ),
             callback=self.async_callback,
         )
 
@@ -162,7 +194,9 @@ class CoinExRequestDataSpot(CoinExRequestData):
     def async_get_open_orders(self, symbol: Any, extra_data: Any = None, **kwargs: Any):
         path, params, extra_data = self._get_open_orders(symbol, extra_data, **kwargs)
         self.submit(
-            self.async_request(path, params=params, extra_data=extra_data, is_sign=True),
+            self.async_request(
+                path, params=params, extra_data=extra_data, is_sign=True
+            ),
             callback=self.async_callback,
         )
 
@@ -176,7 +210,9 @@ class CoinExRequestDataSpot(CoinExRequestData):
         **kwargs: Any,
     ):
         del start_time, end_time
-        path, params, extra_data = self._get_deals(symbol, extra_data, limit=count, **kwargs)
+        path, params, extra_data = self._get_deals(
+            symbol, extra_data, limit=count, **kwargs
+        )
         return self.request(path, params=params, extra_data=extra_data, is_sign=True)
 
     def async_get_deals(
@@ -189,9 +225,13 @@ class CoinExRequestDataSpot(CoinExRequestData):
         **kwargs: Any,
     ):
         del start_time, end_time
-        path, params, extra_data = self._get_deals(symbol, extra_data, limit=count, **kwargs)
+        path, params, extra_data = self._get_deals(
+            symbol, extra_data, limit=count, **kwargs
+        )
         self.submit(
-            self.async_request(path, params=params, extra_data=extra_data, is_sign=True),
+            self.async_request(
+                path, params=params, extra_data=extra_data, is_sign=True
+            ),
             callback=self.async_callback,
         )
 
@@ -200,11 +240,15 @@ class CoinExRequestDataSpot(CoinExRequestData):
         path, params, extra_data = self._get_account(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data, is_sign=True)
 
-    def async_get_account(self, symbol: Any = "ALL", extra_data: Any = None, **kwargs: Any):
+    def async_get_account(
+        self, symbol: Any = "ALL", extra_data: Any = None, **kwargs: Any
+    ):
         del symbol
         path, params, extra_data = self._get_account(extra_data, **kwargs)
         self.submit(
-            self.async_request(path, params=params, extra_data=extra_data, is_sign=True),
+            self.async_request(
+                path, params=params, extra_data=extra_data, is_sign=True
+            ),
             callback=self.async_callback,
         )
 
@@ -213,10 +257,14 @@ class CoinExRequestDataSpot(CoinExRequestData):
         path, params, extra_data = self._get_balance(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data, is_sign=True)
 
-    def async_get_balance(self, symbol: Any = None, extra_data: Any = None, **kwargs: Any):
+    def async_get_balance(
+        self, symbol: Any = None, extra_data: Any = None, **kwargs: Any
+    ):
         del symbol
         path, params, extra_data = self._get_balance(extra_data, **kwargs)
         self.submit(
-            self.async_request(path, params=params, extra_data=extra_data, is_sign=True),
+            self.async_request(
+                path, params=params, extra_data=extra_data, is_sign=True
+            ),
             callback=self.async_callback,
         )
