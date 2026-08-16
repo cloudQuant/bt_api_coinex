@@ -38,7 +38,9 @@ class CoinExBarData(BarData):
         """init_data method"""
         if not self.has_been_json_encoded:
             self.bar_data = (
-                json.loads(self.bar_info) if isinstance(self.bar_info, str) else self.bar_info
+                json.loads(self.bar_info)
+                if isinstance(self.bar_info, str)
+                else self.bar_info
             )
             self.has_been_json_encoded = True
         if self.has_been_init_data:

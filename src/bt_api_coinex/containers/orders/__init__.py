@@ -25,7 +25,9 @@ class CoinExOrderData(OrderData):
         self.symbol_name = symbol_name
         self.asset_type = asset_type
         self.order_data: dict[str, Any] | None = (
-            order_info if has_been_json_encoded and isinstance(order_info, dict) else None
+            order_info
+            if has_been_json_encoded and isinstance(order_info, dict)
+            else None
         )
         self.order_id: str | None = None
         self.order_side: str | None = None
@@ -35,7 +37,9 @@ class CoinExOrderData(OrderData):
         """init_data method"""
         if not self.has_been_json_encoded:
             self.order_data = (
-                json.loads(self.order_info) if isinstance(self.order_info, str) else self.order_info
+                json.loads(self.order_info)
+                if isinstance(self.order_info, str)
+                else self.order_info
             )
             self.has_been_json_encoded = True
         if self.has_been_init_data:
