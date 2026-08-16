@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -6,8 +7,10 @@ from bt_api_base.error import ErrorCategory, ErrorTranslator, UnifiedError, Unif
 
 
 class CoinExErrorTranslator(ErrorTranslator):
+    """Class CoinExErrorTranslator"""
     @classmethod
     def translate(cls, raw_error: dict[str, Any], venue: str) -> UnifiedError | None:
+        """translate method"""
         message = str(raw_error.get("message", raw_error.get("msg", "")))
         lower = message.lower()
         code = raw_error.get("code")
@@ -24,8 +27,7 @@ class CoinExErrorTranslator(ErrorTranslator):
             error_code = UnifiedErrorCode.RATE_LIMIT_EXCEEDED
         elif "auth" in lower or "key" in lower or "signature" in lower:
             error_code = UnifiedErrorCode.INVALID_API_KEY
-        else:
-            return super().translate(raw_error, venue)
+        else: return super().translate(raw_error, venue)
 
         return UnifiedError(
             code=error_code,

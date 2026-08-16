@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -13,6 +14,7 @@ from bt_api_coinex.registry_registration import register_coinex
 
 
 def get_plugin_info() -> PluginInfo:
+    """get_plugin_info function"""
     return PluginInfo(
         name="bt_api_coinex",
         version=__version__,
@@ -27,6 +29,7 @@ def register_plugin(
     registry: ExchangeRegistry | type[ExchangeRegistry],
     runtime_factory: type[GatewayRuntimeRegistrar],
 ) -> PluginInfo:
+    """register_plugin function"""
     del runtime_factory
     register_coinex(registry)
     return get_plugin_info()

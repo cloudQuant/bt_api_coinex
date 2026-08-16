@@ -1,3 +1,4 @@
+"""Module documentation"""
 from __future__ import annotations
 
 import hashlib
@@ -15,7 +16,9 @@ from bt_api_coinex.exchange_data import CoinExExchangeDataSpot
 
 
 class CoinExRequestData(Feed):
+    """Class CoinExRequestData"""
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self._api_key = (
             kwargs.get("public_key") or kwargs.get("api_key") or kwargs.get("access_id") or ""
@@ -86,6 +89,7 @@ class CoinExRequestData(Feed):
         return input_data
 
     def async_callback(self, future: Any) -> None:
+        """async_callback method"""
         try:
             result = future.result()
             if result is not None:
@@ -94,13 +98,16 @@ class CoinExRequestData(Feed):
             self.async_logger.error(f"Async callback error: {exc}")
 
     def push_data_to_queue(self, data: Any) -> None:
+        """push_data_to_queue method"""
         if self.data_queue is not None:
             self.data_queue.put(data)
 
     def disconnect(self) -> None:
+        """disconnect method"""
         super().disconnect()
 
     def request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
+        """request method"""
         if params is None:
             params = {}
         if extra_data is None:
@@ -129,6 +136,7 @@ class CoinExRequestData(Feed):
     async def async_request(
         self, path, params=None, body=None, extra_data=None, timeout=5, is_sign=False
     ):
+        """async_request method"""
         if params is None:
             params = {}
         if extra_data is None:
